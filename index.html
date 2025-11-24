@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Memo App</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <h1 class="logo">Memo<span class="accent">.</span></h1>
+        <p class="subtitle">Quick notes — simple and private</p>
+      </div>
+    </header>
+
+    <main class="wrap main-grid" id="main">
+      <section class="panel form-panel" aria-labelledby="new-memo-heading">
+        <h2 id="new-memo-heading" class="visually-hidden">New memo</h2>
+
+        <form class="memo-form" onsubmit="return false;">
+          <label for="memo-title" class="label">Title</label>
+          <input
+            type="text"
+            id="memo-title"
+            class="input"
+            placeholder="Enter a title"
+          />
+
+          <label for="memo-content" class="label">Content</label>
+          <textarea
+            id="memo-content"
+            class="textarea"
+            rows="6"
+            placeholder="Write your note..."
+          ></textarea>
+
+          <div class="row">
+            <label for="memo-category" class="label small">Category</label>
+            <select id="memo-category" class="select">
+              <option value="General">General</option>
+              <option value="Work">Work</option>
+              <option value="Personal">Personal</option>
+            </select>
+
+            <button id="add-memo-btn" type="button" class="btn primary">Add</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel list-panel" aria-labelledby="memos-heading">
+        <div class="search-row">
+          <input
+            id="search-input"
+            class="input search"
+            type="search"
+            placeholder="Search memos..."
+            aria-label="Search memos"
+          />
+        </div>
+
+        <h2 id="memos-heading" class="visually-hidden">Memos</h2>
+        <div id="memo-list" class="memo-list" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <small>Local-first • No tracking • Built with vanilla JS</small>
+      </div>
+    </footer>
+  </body>
+</html>
