@@ -25,8 +25,8 @@ const searchInput = document.getElementById("search-input");
 const categories = ["General", "Work", "Personal"];
 
 
-// <!-- テスト -->
-localStorage.clear();
+// クリア
+// localStorage.clear();
 dummyNotes = [];
 for (let i = 1; i <= 3; i++) {
   dummyNotes.push({
@@ -79,6 +79,14 @@ function resetForm() {
   memoCategorySelect.value = "General";
 }
 
+function searchMemos(query) {
+  const memos = getMemos();
+  return memos.filter(memo => 
+    memo.title.toLowerCase().includes(query.toLowerCase()) || 
+    memo.content.toLowerCase().includes(query.toLowerCase())
+  );
+}
+
 addBtn.addEventListener("click", () => {
     const title = memoTitleInput.value.trim();
     const content = memoContentInput.value.trim();
@@ -98,3 +106,9 @@ addBtn.addEventListener("click", () => {
         resetForm();
     }
 })
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.trim();
+  const filteredMemos = searchMemos(query);
+  renderMemos(filteredMemos);
+});
