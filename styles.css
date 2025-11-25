@@ -264,7 +264,7 @@ body.modal-open {
   overflow: hidden; /* prevent background scroll when modal open */
 }
 .modal {
-  --backdrop: rgba(2,6,23,0.6);
+  --backdrop: rgba(2, 6, 23, 0.6);
   position: fixed;
   inset: 0;
   display: none;
@@ -295,21 +295,38 @@ body.modal-open {
   max-width: 560px;
 }
 .modal-content {
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 12px 40px rgba(2,6,23,0.6);
-  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 12px 40px rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   color: inherit;
 }
 .modal-content h3 {
   margin: 0 0 8px 0;
   font-size: 16px;
 }
-.modal-content p { margin: 0 0 16px 0; }
-.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
-.modal-actions .btn { padding: 8px 12px; border-radius: 8px; }
-.modal-actions .btn.primary { padding-left: 14px; padding-right: 14px; }
+.modal-content p {
+  margin: 0 0 16px 0;
+}
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+.modal-actions .btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+.modal-actions .btn.primary {
+  padding-left: 14px;
+  padding-right: 14px;
+}
 
 /* Edit form in modal */
 .edit-form .label {
@@ -344,6 +361,34 @@ body.modal-open {
   color: var(--muted);
   font-size: 13px;
 }
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Clear button - modern danger style */
+.btn.clear {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  background: rgba(255, 107, 107, 0.08);
+  color: #ff6b6b;
+  border: 1px solid rgba(255, 107, 107, 0.12);
+  transition: all 180ms ease;
+}
+.btn.clear:hover {
+  background: rgba(255, 107, 107, 0.14);
+  border-color: rgba(255, 107, 107, 0.24);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.18);
+}
+.btn.clear:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(255, 107, 107, 0.12);
+}
 
 .visually-hidden {
   position: absolute;
@@ -366,7 +411,6 @@ body.modal-open {
   box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.12);
   border-color: rgba(124, 92, 255, 0.6);
 }
-
 
 /* Responsive */
 @media (max-width: 900px) {

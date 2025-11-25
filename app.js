@@ -16,6 +16,8 @@
 //     ・編集はモーダルで行えるようにする
 //     ・memoをクリックすると編集,削除モーダルが表示されるようにする
 //      ・memoにdelete,editボタンを追加する。
+// debugようにclearButton追加
+let dummyNotes = [];
 
 const addBtn = document.getElementById("add-memo-btn");
 const memoForm = document.getElementById("memo-form");
@@ -26,14 +28,12 @@ const searchInput = document.getElementById("search-input");
 
 const categories = ["General", "Work", "Personal"];
 
-// クリア
-// localStorage.clear();
 dummyNotes = [];
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i <= 100;i++) {
   dummyNotes.push({
     id: Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8), // 重複しないランダムID
     title: `ダミーメモタイトル ${i}`,
-    content: `これはダミーメモの内容です。メモ番号は ${i} です。aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`,
+    content: `これはダミーメモの内容です。メモ番号は ${i} です。`,
     category: categories[(i - 1) % 3], // 3つのカテゴリに分類,
     createdAt: Date.now() - i * 1000 * 60, // 作成時間をi分少しずつずらす
   });
@@ -209,6 +209,11 @@ function saveEdit() {
 
   editMemo(_pendingEditId, newTitle, newContent, newCategory);
   hideEditModal();
+}
+
+function clearAllMemos() {
+  localStorage.removeItem("memos");
+  renderMemos([]);
 }
 
 addBtn.addEventListener("click", () => {
