@@ -173,12 +173,11 @@ body {
   flex-direction: column;
   gap: 6px;
 }
-.memo-title {
-  font-weight: 600;
-  font-size: 14px;
-}
+
 .memo-title {
   /* single-line title with ellipsis */
+  font-weight: 600;
+  font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
