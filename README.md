@@ -6,6 +6,7 @@ A modern, lightweight note-taking application built with vanilla JavaScript. Fea
 
 ## How this project was built
 
+This is learning project.
 From the AI-generated HTML and CSS drafts,
 I wrote the specs and JS within Copilot'.
 Afterward, I made some fixes and add features using AI bug checking and auditing.
