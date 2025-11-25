@@ -61,10 +61,12 @@ function renderMemos(memos) {
                 ).toLocaleString()}</small>
               </div>
               <div class="meta-actions">
-                <button class="btn edit-btn" onclick="editMemo('${
+                <button class="btn edit-btn" onclick="showEditModal('${
                   memo.id
                 }')" aria-label="Edit ${memo.title}">Edit</button>
-                  <button class="btn delete-btn" onclick="showDeleteModal('${memo.id}')" aria-label="Delete ${memo.title}">Delete</button>
+                  <button class="btn delete-btn" onclick="showDeleteModal('${
+                    memo.id
+                  }')" aria-label="Delete ${memo.title}">Delete</button>
               </div>
             </div>
         `;
@@ -128,24 +130,24 @@ let _pendingDeleteId = null;
 function showDeleteModal(id) {
   _pendingDeleteId = id;
   const memos = getMemos();
-  const memo = memos.find(m => m.id === id) || { title: '' };
-  const modal = document.getElementById('delete-modal');
-  const modalMsg = document.getElementById('delete-modal-msg');
+  const memo = memos.find((m) => m.id === id) || { title: "" };
+  const modal = document.getElementById("delete-modal");
+  const modalMsg = document.getElementById("delete-modal-msg");
   modalMsg.textContent = `Delete "${memo.title}"? This cannot be undone.`;
-  modal.classList.add('open');
-  modal.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('modal-open');
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
   // focus confirm button
-  const confirmBtn = document.getElementById('delete-confirm');
+  const confirmBtn = document.getElementById("delete-confirm");
   if (confirmBtn) confirmBtn.focus();
 }
 
 function hideDeleteModal() {
-  const modal = document.getElementById('delete-modal');
+  const modal = document.getElementById("delete-modal");
   if (!modal) return;
-  modal.classList.remove('open');
-  modal.setAttribute('aria-hidden', 'true');
-  document.body.classList.remove('modal-open');
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
   _pendingDeleteId = null;
 }
 
@@ -155,12 +157,59 @@ function confirmDelete() {
   hideDeleteModal();
 }
 
-// 編集モーダルを作成
+// Edit modal handling
+let _pendingEditId = null;
+function showEditModal(id) {
+  _pendingEditId = id;
+  const memos = getMemos();
+  const memo = memos.find((m) => m.id === id);
+  if (!memo) return;
 
+  const modal = document.getElementById("edit-modal");
+  const titleInput = document.getElementById("edit-title");
+  const contentInput = document.getElementById("edit-content");
+  const categorySelect = document.getElementById("edit-category");
 
-  // モーダルの要素を作成
+  titleInput.value = memo.title;
+  contentInput.value = memo.content;
+  categorySelect.value = memo.category;
 
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
 
+  // focus title input
+  if (titleInput) titleInput.focus();
+}
+
+function hideEditModal() {
+  const modal = document.getElementById("edit-modal");
+  if (!modal) return;
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-open");
+  _pendingEditId = null;
+}
+
+function saveEdit() {
+  if (!_pendingEditId) return hideEditModal();
+
+  const titleInput = document.getElementById("edit-title");
+  const contentInput = document.getElementById("edit-content");
+  const categorySelect = document.getElementById("edit-category");
+
+  const newTitle = titleInput.value.trim();
+  const newContent = contentInput.value.trim();
+  const newCategory = categorySelect.value;
+
+  if (!newTitle || !newContent) {
+    alert("Title and content are required");
+    return;
+  }
+
+  editMemo(_pendingEditId, newTitle, newContent, newCategory);
+  hideEditModal();
+}
 
 addBtn.addEventListener("click", () => {
   const title = memoTitleInput.value.trim();

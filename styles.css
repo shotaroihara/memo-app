@@ -291,6 +291,9 @@ body.modal-open {
   align-items: center;
   justify-content: center;
 }
+.modal-panel-large {
+  max-width: 560px;
+}
 .modal-content {
   background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   border-radius: 12px;
@@ -304,9 +307,36 @@ body.modal-open {
   font-size: 16px;
 }
 .modal-content p { margin: 0 0 16px 0; }
-.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
 .modal-actions .btn { padding: 8px 12px; border-radius: 8px; }
 .modal-actions .btn.primary { padding-left: 14px; padding-right: 14px; }
+
+/* Edit form in modal */
+.edit-form .label {
+  display: block;
+  margin-bottom: 6px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.edit-form .label:first-of-type {
+  margin-top: 0;
+}
+.edit-form .input,
+.edit-form .textarea,
+.edit-form .select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--glass);
+  color: inherit;
+  font-size: 14px;
+}
+.edit-form .textarea {
+  resize: vertical;
+  min-height: 96px;
+}
 
 .site-footer {
   padding: 14px 0;
