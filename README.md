@@ -97,7 +97,3 @@ No build process or dependencies required!
 
 - Click "Clear All Memos" in the footer
 - Useful for resetting to a clean state during development
-
----
-
-Made with ❤️ by shotaro-dev • [MIT Licensed](LICENSE)
