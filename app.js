@@ -51,8 +51,10 @@ function renderMemos(memos) {
     const memoElement = document.createElement("div");
     memoElement.className = "memo-card";
     memoElement.innerHTML = `
-            <h3 class="memo-title">${memo.title}</h3>
-            <p class="memo-body">${memo.content}</p>
+            <div class="memo-content-block">
+              <h3 class="memo-title">${memo.title}</h3>
+              <p class="memo-body">${memo.content}</p>
+            </div>
             <div class="memo-meta">
               <div class="meta-top">
                 <p class="category">${memo.category}</p>

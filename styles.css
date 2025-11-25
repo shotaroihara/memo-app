@@ -159,13 +159,19 @@ body {
   min-height: 88px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 12px;
   min-width: 0; /* allow children to shrink/wrap inside grid */
   transition: transform 180ms ease, box-shadow 180ms ease,
     border-color 180ms ease;
   will-change: transform, box-shadow;
   background-color: var(--card);
   box-shadow: 0 4px 12px rgba(2, 6, 23, 0.35);
+}
+.memo-content-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 .memo-title {
   font-weight: 600;
