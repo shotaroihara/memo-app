@@ -1,22 +1,22 @@
-//         <!-- 要件定義-->
-//  学習用にvanilla-jsでメモアプリを作成する。
-// <!-- 仕様 -->
-//     ・メモの追加、編集、削除ができる。
-//     ・メモはローカルストレージに保存され、ページをリロードしても内容が保持される。
-//     ・シンプルなUIで、メモの一覧表示と入力フォームを含む。
-//     ・リアルタイム検索機能（タイトル、本文で）を実装し、メモの内容をフィルタリングできる。
-//     ・カテゴリでメモを分類できる機能を追加する。
-// <!-- 設計    -->
-//     ・HTMLで基本的な構造を作成し、CSSでスタイリングを行う。
-//     ・JavaScriptでメモの追加、編集、削除、ローカルストレージへの保存、検索機能を実装する。
-//     ・カテゴリ機能はドロップダウンメニューで選択できるようにする。
-// 　　・ダミーデータを100件jsで作る。
-//     ・idは重複しないようにランダムで生成する。
-//      ・作成されたときの時間も記録する
-//     ・編集はモーダルで行えるようにする
-//     ・memoをクリックすると編集,削除モーダルが表示されるようにする
-//      ・memoにdelete,editボタンを追加する。
-// debugようにclearButton追加
+// <!-- Requirements -->
+// Create a memo app using vanilla JavaScript for learning purposes.
+// <!-- Specifications -->
+//     • Add, edit, and delete memos.
+//     • Memos are saved to local storage and persist after page reload.
+//     • Simple UI with memo list display and input form.
+//     • Real-time search functionality (by title and content) to filter memos.
+//     • Add category feature to classify memos.
+// <!-- Design -->
+//     • Create basic structure with HTML and style with CSS.
+//     • Implement memo add, edit, delete, local storage saving, and search with JavaScript.
+//     • Category selection via dropdown menu.
+//     • Generate 100 dummy data items with JavaScript.
+//     • Generate unique random IDs to avoid duplicates.
+//     • Record creation timestamp.
+//     • Enable editing via modal.
+//     • Display edit/delete modal when clicking memo buttons.
+//     • Add delete and edit buttons to memo cards.
+//     • Clear button added for debugging
 let dummyNotes = [];
 
 const addBtn = document.getElementById("add-memo-btn");
@@ -28,22 +28,26 @@ const searchInput = document.getElementById("search-input");
 
 const categories = ["General", "Work", "Personal"];
 
-dummyNotes = [];
-for (let i = 1; i <= 100;i++) {
-  dummyNotes.push({
-    id: Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8), // 重複しないランダムID
-    title: `ダミーメモタイトル ${i}`,
-    content: `これはダミーメモの内容です。メモ番号は ${i} です。`,
-    category: categories[(i - 1) % 3], // 3つのカテゴリに分類,
-    createdAt: Date.now() - i * 1000 * 60, // 作成時間をi分少しずつずらす
-  });
+function init() {
+  dummyNotes = [];
+  for (let i = 1; i <= 100; i++) {
+    dummyNotes.push({
+      id:
+        Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8), // Unique random ID
+      title: `Dummy Memo Title ${i}`,
+      content: `This is dummy memo content. Memo number is ${i}.`,
+      category: categories[(i - 1) % 3], // Classify into 3 categories
+      createdAt: Date.now() - i * 1000 * 60, // Offset creation time by i minutes
+    });
+  }
+
+  // Save to local storage (first time only)
+  if (!localStorage.getItem("memos")) {
+    localStorage.setItem("memos", JSON.stringify(dummyNotes));
+  }
+  renderMemos(getMemos());
 }
 
-// ローカルストレージに保存（初回のみ）
-if (!localStorage.getItem("memos")) {
-  localStorage.setItem("memos", JSON.stringify(dummyNotes));
-}
-// dummyNotesをhtmlに描画する関数を呼び出す
 function renderMemos(memos) {
   const memoList = document.getElementById("memo-list");
   memoList.innerHTML = "";
@@ -75,15 +79,14 @@ function renderMemos(memos) {
     memoList.appendChild(memoElement);
   });
 }
-renderMemos(getMemos());
 
-// ローカルストレージからメモを取得
+// Get memos from local storage
 function getMemos() {
   const memos = JSON.parse(localStorage.getItem("memos")) || [];
   return memos;
 }
 
-// ローカルストレージにメモを保存
+// Save memos to local storage
 function saveMemos(memos) {
   localStorage.setItem("memos", JSON.stringify(memos));
 }
@@ -139,7 +142,7 @@ function showDeleteModal(id) {
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
-  // focus confirm button
+  // Focus confirm button
   const confirmBtn = document.getElementById("delete-confirm");
   if (confirmBtn) confirmBtn.focus();
 }
@@ -180,7 +183,7 @@ function showEditModal(id) {
   modal.setAttribute("aria-hidden", "false");
   document.body.classList.add("modal-open");
 
-  // focus title input
+  // Focus title input
   if (titleInput) titleInput.focus();
 }
 
@@ -225,7 +228,7 @@ addBtn.addEventListener("click", () => {
   if (title && content) {
     const newMemo = {
       id:
-        Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8), // 重複しないランダムID
+        Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 8), // Unique random ID
       title,
       content,
       category,
@@ -244,3 +247,6 @@ searchInput.addEventListener("input", () => {
   const filteredMemos = searchMemos(query);
   renderMemos(filteredMemos);
 });
+
+// init
+init();
