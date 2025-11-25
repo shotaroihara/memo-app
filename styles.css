@@ -250,14 +250,63 @@ body {
   line-height: 1;
   max-width: 140px;
   overflow: hidden;
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .memo-meta small {
   color: var(--muted);
   opacity: 0.9;
 }
+
+/* Modal styles */
+body.modal-open {
+  overflow: hidden; /* prevent background scroll when modal open */
+}
+.modal {
+  --backdrop: rgba(2,6,23,0.6);
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.modal.open {
+  display: flex;
+}
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--backdrop);
+  backdrop-filter: blur(4px);
+}
+.modal-panel {
+  position: relative;
+  z-index: 2001;
+  max-width: 440px;
+  width: calc(100% - 40px);
+  margin: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 12px 40px rgba(2,6,23,0.6);
+  border: 1px solid rgba(255,255,255,0.04);
+  color: inherit;
+}
+.modal-content h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+}
+.modal-content p { margin: 0 0 16px 0; }
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.modal-actions .btn { padding: 8px 12px; border-radius: 8px; }
+.modal-actions .btn.primary { padding-left: 14px; padding-right: 14px; }
 
 .site-footer {
   padding: 14px 0;
@@ -287,6 +336,7 @@ body {
   box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.12);
   border-color: rgba(124, 92, 255, 0.6);
 }
+
 
 /* Responsive */
 @media (max-width: 900px) {
