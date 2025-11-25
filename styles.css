@@ -96,6 +96,14 @@ body {
   color: inherit;
   font-size: 14px;
 }
+.select {
+  /* Ensure select text is visible in all themes */
+  color: #e6eef8;
+}
+.select option {
+  background: var(--card);
+  color: #e6eef8;
+}
 .textarea {
   resize: vertical;
   min-height: 96px;
@@ -426,26 +434,96 @@ body.modal-open {
   /* Light-mode variable overrides so the same component styles follow a light theme.
      We override the same custom properties defined in :root above. */
   :root {
-    --bg: #f7fafc; /* page background (light) */
+    --bg: #f0f4f8; /* softer blue-gray background */
     --card: #ffffff;
-    --muted: #475569; /* slate-600 - for secondary text */
-    --accent: #4f46e5; /* indigo */
-    --accent-2: #0891b2; /* cyan */
+    --muted: #64748b; /* slate-500 - better contrast for secondary text */
+    --accent: #6366f1; /* brighter indigo */
+    --accent-2: #06b6d4; /* brighter cyan */
     --surface: #ffffff;
-    --glass: rgba(11, 18, 32, 0.03); /* subtle frosted effect on light */
+    --glass: rgba(15, 23, 42, 0.04); /* slightly more visible glass effect */
     --gap: 16px;
     --max-width: 980px;
     --radius: 12px;
   }
 
   body {
-    background: var(--bg);
-    color: #0b1220;
+    background: linear-gradient(180deg, #f0f4f8 0%, #e2e8f0 100%);
+    color: #0f172a; /* darker text for better readability */
+  }
+
+  /* Select visibility in light mode */
+  .select {
+    color: #0f172a;
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(15, 23, 42, 0.1);
+  }
+  .select option {
+    background: #ffffff;
+    color: #0f172a;
+  }
+
+  .input,
+  .textarea {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(15, 23, 42, 0.1);
+    color: #0f172a;
   }
 
   .panel {
-    background: var(--surface);
-    color: inherit;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+  }
+
+  .memo-card {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+  }
+
+  .memo-card:hover,
+  .memo-card:focus-within {
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+    border-color: rgba(99, 102, 241, 0.3);
+  }
+
+  .memo-title {
+    color: #0f172a;
+  }
+
+  .memo-body {
+    color: #475569;
+  }
+
+  .memo-meta .category {
+    background: color-mix(in srgb, var(--accent) 15%, transparent);
+    color: var(--accent);
+  }
+
+  .modal-backdrop {
+    background: rgba(15, 23, 42, 0.4);
+  }
+
+  .modal-content {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.1);
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.15);
+  }
+
+  .btn.clear {
+    background: rgba(239, 68, 68, 0.1);
+    color: #dc2626;
+    border-color: rgba(239, 68, 68, 0.2);
+  }
+
+  .btn.clear:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+
+  .site-footer {
+    border-top-color: rgba(15, 23, 42, 0.1);
   }
 
   .logo .accent {
